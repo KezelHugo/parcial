@@ -18,4 +18,4 @@ Este proyecto es un microservicio construido con Spring Boot que gestiona produc
 
 ## Autor
 
-Kevin Sosa Benjamin León
+Kevin Benjamin Sosa León
