@@ -1,0 +1,26 @@
+# Archivos de compilación
+/target/
+
+# Archivos del IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+*.log
+
+# Archivos temporales de ejecución
+*.class
+
+# Archivos de configuración local
+.env
+*.local
+
+# Otros
+.settings/
+.vscode/
