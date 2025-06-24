@@ -1,6 +1,7 @@
 package com.msproducts.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.msproducts.dto.ProductDTO;
+import com.msproducts.dto.ProductStockValidationDTO;
 import com.msproducts.service.ProductService;
 
 import jakarta.validation.Valid;
@@ -52,17 +54,18 @@ public ResponseEntity<ProductDTO> getById(@PathVariable @Min(1) Long id) {
 }
 
 @GetMapping("/search")
-  public ResponseEntity<?> findByName(
-    @RequestParam @NotBlank(message = "El parámetro 'name' es obligatorio") String name,
-    @RequestParam(defaultValue = "0") @Min(0) int page,
-    @RequestParam(defaultValue = "5") @Min(1) int size
-  ) {
-    Page<ProductDTO> result = productService.findByName(name, page, size);
-    if (result.isEmpty()) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron resultados");
-    }
-    return ResponseEntity.ok(result);
+public ResponseEntity<Object> findByName(
+  @RequestParam @NotBlank(message = "El parámetro 'name' es obligatorio") String name,
+  @RequestParam(defaultValue = "0") @Min(0) int page,
+  @RequestParam(defaultValue = "5") @Min(1) int size
+) {
+  Page<ProductDTO> result = productService.findByName(name, page, size);
+  if (result.isEmpty()) {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+      .body(Map.of("message", "No se encontraron resultados para: " + name));
   }
+  return ResponseEntity.ok(result);
+}
 
 @PostMapping("")
 public ResponseEntity<ProductDTO> create(@Valid @RequestBody ProductDTO productDto) {
@@ -80,6 +83,24 @@ public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestB
 public ResponseEntity<Void> delete(@PathVariable Long id) {
     productService.deleteById(id);
     return ResponseEntity.noContent().build();
+}
+
+@GetMapping("/{id}/validate")
+public ResponseEntity<ProductStockValidationDTO> validateStock(
+    @PathVariable Long id,
+    @RequestParam int quantity) {
+
+  ProductStockValidationDTO response = productService.validateStock(id, quantity);
+  return ResponseEntity.ok(response);
+}
+
+@PutMapping("/{id}/decrease-stock")
+public ResponseEntity<String> decreaseStock(
+    @PathVariable Long id,
+    @RequestParam int quantity) {
+
+  productService.decreaseStock(id, quantity);
+  return ResponseEntity.ok("Stock actualizado correctamente");
 }
 
 }

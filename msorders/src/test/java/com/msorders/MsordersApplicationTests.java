@@ -1,10 +1,10 @@
-package com.msproducts;
+package com.msorders;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MsproductsApplicationTests {
+class MsordersApplicationTests {
 
 	@Test
 	void contextLoads() {
