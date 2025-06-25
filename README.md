@@ -1,8 +1,8 @@
-# 📦 E-Commerce Microservices: Gestión de Productos y Órdenes de Compra
+# E-Commerce Microservices: Gestión de Productos y Órdenes de Compra
 
 Este proyecto consiste en dos microservicios desarrollados con **Spring Boot 3.x** que permiten gestionar productos y órdenes de compra de un sistema simple de e-commerce.
 
-## 🧩 Microservicios
+## Microservicios
 
 1. **ms-products**  
    - CRUD de productos.
@@ -17,20 +17,20 @@ Este proyecto consiste en dos microservicios desarrollados con **Spring Boot 3.x
 
 ---
 
-## ▶️ Cómo ejecutar el proyecto
+## Cómo ejecutar el proyecto
 
 ### 1. Prerrequisitos
 
 - Java 17+
 - Maven
 - MySQL
-- Postman (opcional)
+- Postman
 - SonarQube (para validación de código)
 
 ### 2. Base de datos
 
 Ambos microservicios utilizan **la misma base de datos**: `parcial_db`.  
-> ⚠️ Solo necesitas crear una vez:
+> Solo necesitas crear una vez:
 
 ```sql
 CREATE DATABASE parcial_db;
@@ -44,11 +44,11 @@ Puedes ejecutar ambos microservicios de dos formas:
 
 ```bash
 # Terminal 1: Iniciar ms-products
-cd ms-products
+cd msproducts
 mvn spring-boot:run
 
 # Terminal 2: Iniciar ms-orders
-cd ms-orders
+cd msorders
 mvn spring-boot:run
 ```
 
@@ -63,10 +63,10 @@ Esto te permite correr cada microservicio de manera independiente desde tu entor
 
 ---
 
-## 📮 Colección Postman
+## Colección Postman
 
 Se incluye una colección de Postman para probar los endpoints principales:  
-📁 `postman_collection.json`
+ `postman_collection.json`
 
 | Método | Servicio     | Endpoint                                      | Descripción                                      |
 |--------|--------------|-----------------------------------------------|--------------------------------------------------|
@@ -75,21 +75,27 @@ Se incluye una colección de Postman para probar los endpoints principales:
 | POST   | ms-orders    | `/orders`                                     | Crear una orden de compra                        |
 | GET    | ms-orders    | `/orders/search?customer=kevin`               | Buscar órdenes por cliente                       |
 
+**Creación de producto**
 ![Creación de producto](assets/postman-result-1.png)
 
+**Validación de creación de producto**
 ![Validación de creación de producto](assets/postman-result-2.png)
 
+**Listado de productos por nombre parcial y paginados**
 ![Listado de productos por nombre parcial y paginados](assets/postman-result-3.png)
 
+**Creación de orden**
 ![Creación de orden](assets/postman-result-4.png)
 
+**Validación de creación de orden**
 ![Validación de creación de orden](assets/postman-result-5.png)
 
+**Listado de ordenes por nombre del cliente**
 ![Listado de ordenes por nombre del cliente](assets/postman-result-6.png)
 
 ---
 
-## 🧠 Patrones Aplicados
+## Patrones Aplicados
 
 - **Builder**  
   Aplicado en entidades `Product`, `Order`, `OrderItem`, y en DTOs.
@@ -99,7 +105,7 @@ Se incluye una colección de Postman para probar los endpoints principales:
 
 ---
 
-## 🧪 Validación de Código con Sonar
+## Validación de Código con Sonar
 
 El proyecto fue escaneado con **SonarQube**.  
 Se corrigieron las siguientes prácticas:
@@ -107,39 +113,14 @@ Se corrigieron las siguientes prácticas:
 - Eliminación de inyecciones por campo (`@Autowired`) → uso de **constructor injection**.
 - Reutilización de cadenas repetidas (como `"timestamp"`).
 - Manejo de excepciones genéricas reemplazadas por **custom exceptions** (`InsufficientStockException`, etc).
-- Reemplazo de `Collectors.toList()` por `stream().toList()`.
 - Eliminación de parámetros no usados, código no cubierto, etc.
 
+**Reporte SonarQube de los dos microservicios** 
 ![Reporte SonarQube](assets/sonar-result.png)
 
 ---
 
-## 📚 Estructura del Proyecto
-
-```
-📦 ms-products
- ┣ 📂controller
- ┣ 📂dto
- ┣ 📂exception
- ┣ 📂model
- ┣ 📂repository
- ┣ 📂service
- ┣ 📄application.properties
-
-📦 ms-orders
- ┣ 📂client
- ┣ 📂controller
- ┣ 📂dto
- ┣ 📂exception
- ┣ 📂model
- ┣ 📂repository
- ┣ 📂service
- ┣ 📄application.properties
-```
-
----
-
-## 📌 Notas Finales
+## Notas Finales
 
 - El sistema está **modularizado por capas** siguiendo buenas prácticas de arquitectura.
 - Todos los endpoints devuelven respuestas HTTP adecuadas y mensajes personalizados.
@@ -148,8 +129,8 @@ Se corrigieron las siguientes prácticas:
 
 ---
 
-## ✍️ Autor
+## Autor
 
 > Kevin Benjamin Sosa León
-Evalución Parcial - Junio 2025
-Desarrollo de los Componentes del Negocio
+
+Evalución Parcial - Desarrollo de los Componentes del Negocio
